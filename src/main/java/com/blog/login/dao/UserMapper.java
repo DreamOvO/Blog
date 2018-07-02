@@ -1,6 +1,9 @@
 package com.blog.login.dao;
 
+import java.util.Map;
+
 import com.blog.login.projo.User;
+
 
 public interface UserMapper {
     int deleteByPrimaryKey(Integer id);
@@ -14,4 +17,6 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+    
+    Map<String,Object> selectByUserName(String userName);
 }

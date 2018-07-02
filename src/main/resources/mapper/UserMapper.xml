@@ -79,4 +79,9 @@
       age = #{age,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectByUserName" resultType="map" parameterType="String" >
+    select user_t.password
+    from user_t
+    where user_name = #{userName}
+  </select>
 </mapper>

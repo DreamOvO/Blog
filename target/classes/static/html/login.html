@@ -1,26 +1,47 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="/css/form-elements.css">
-<link rel="stylesheet" href="/css/style.css">
+
 <script src="/js/jquery-3.3.1.js"></script>
 <script type="text/javascript">
-//{"id":1,"userName":"client1","password":"123456","age":22}
-$(document).ready(function(){
-	 $.ajax({
-         method: "GET",
-         url: "/user/User1",
-         dataType: "json",
-         success: function(data){
-        	 $("p").append(data.id,data.userName);
-          }
-     });
-});
-</script>
+	$(document).ready(function(){
+		$('button').on('click',function(){
+			$.ajax({
+		         method : "POST",
+		         url : "/user/loginJudge",
+		         data : {
+		        	 userName:$("#form-username").val(),
+		        	 passWord:$("#form-password").val()
+		         },
+		         dataType : "json",
+		         success : function(data){
+//		        	 $("p").append(data.rspType);
+		        	 if(data.rspType == "SUCESS")
+		        		 $("p").append("验证通过");
+		        	 else
+		        		 $("p").append("验证错误");
+		          },
+		         error : function(){
+		        	 $("p").append("无法登录");
+		          }
+		     });
+		});
+	}); 
+	</script>
+
 <meta charset="UTF-8">
 <title>登录界面</title>
 </head>
 <body>
+
+	<!-- 播放第一个 source -->
+	<!--  
+	<video  width="320" height="240" autoplay="autoplay" loop="loop">
+	
+	<source src="movie.mp4" type="video/mp4">
+	</video>
+-->
+
 	<form role="form" action="" method="post" class="login-form">
 		<div class="form-group">
 			<label class="sr-only" for="form-username">Username</label> <input
@@ -32,8 +53,13 @@ $(document).ready(function(){
 				type="password" name="form-password" placeholder="Password..."
 				class="form-password form-control" id="form-password">
 		</div>
-		<button type="submit" class="btn">Sign in!</button>
+		<button type="button" class="btn">Sign in!</button>
 	</form>
+
+
+
 	<p></p>
+
+
 </body>
 </html>

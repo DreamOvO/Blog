@@ -1,5 +1,8 @@
 package com.blog.login.service.impl;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -15,5 +18,18 @@ public class UserLoginServiceImpl implements UserLoginService {
 
     public User getUserById(int userId) {
         return this.userMapper.selectByPrimaryKey(userId);
+    }
+    
+    public Map<String,Object> selectByUserName(Map<String,Object> params){ 
+    	Map<String, Object> result =new HashMap<String,Object>();
+    	Map<String, Object> map=userMapper.selectByUserName(params.get("userName").toString());
+    	if(map.get("password").equals(params.get("passWord")))
+    		result.put("rspType", "SUCESS");
+    	else {
+    		result.put("rspType", "FAIL");
+    		result.put("message", "密码错误");
+    	}
+    	return result;
+    	
     }
 }
